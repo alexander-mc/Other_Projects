@@ -1,0 +1,39 @@
+Putting it all together:
+
+1) When building a web app, there are primarily three components:
+
+	1) An external server = An external database, such as google or facebook, where information is stored.
+	2) Your App / server = The intermediary between a client's browser and an external server.
+	3) The client's browser = How a client interacts with your app.
+
+2) Linking the three components:
+
+	External server
+
+		- You can build the database (.db) file with a python file with SQL Alchemy imported into it (SQL Alchemy makes it simple to create a database using python)
+			- Within your database python file, you include a function to display the layout of your JSON request (the code represented on a browser to display contents on the webpage in a readable format)
+		- You can build a database using SQL code from your Terminal application
+		- The external server (e.g. google, facebook, twitter, nytimes, wikipedia) may have an API, through which you can access information on the external server.
+
+
+	External server (1) <---> Your app (2)
+		- You gather information from the external server using SQL Alchemy. Once SQL Alchemy is imported into your python file, you can manipulate information in a database file (.db file)
+
+		- To implement the API, you can use jQuery, which is a javascript library. jQuery is an abstraction of javascript, that is, it makes javascript seem simpler, disguising complicated processes with simpler, user-friendly code
+			- That is, jQuery is used to store information from an external server / third-party api AS WELL AS make changes in your browser html file.
+
+	Your app
+		- Normally written in python or javascript
+		- A js file would include jQuery
+
+	Your App (2) <---> Client browser (3)
+		- You can use the flask class and Flask library (e.g. 'from flask import Flask') in your app python file (e.g. project.py) to serve as a framework to simplify GET and POST requests to and from your app python file and your html (browser) file
+		- You can use the jsonify library in Flask to display information on a webpage in a readable format.
+			- The format of this webpage is created through a 'serialize' function, which is defined in your database python file (e.g. database_setup.py)
+		- jQuery can also append items in your html file!
+
+	Client browser
+		- Client interacts with your website, which is written in html and styled with CSS
+		- boostrap is a framework with tools to help you style your webpage
+			- the boostrap file is linked to via your html file
+			- the boostrap file is stored in your css folder

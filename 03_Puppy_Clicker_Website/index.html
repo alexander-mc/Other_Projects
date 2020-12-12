@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Puppy Clicker Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id= "header" class="header">
+		<h1>My Puppy Clicker Project</h1>
+	</div>
+	<div id= "puppy-list-container" class= "puppy-list-container">
+		<h2>Puppies:</h2>
+		<ul id="puppy-list" class="puppy-list">
+		</ul>
+	</div>
+	<div class= "show-puppy-info" id= "show-puppy-info">
+		<div id="puppy-info-container" class="puppy-info-container">
+			</br>
+			<div id="puppy-name" class="puppy-name"></div>
+			</br>
+			<div class="overlay-wrapper">
+				<img id="puppy-image" class="puppy-image" src="" alt="Puppy Image">
+				<div class="overlay">Click me!</div>
+			</div>
+			</br>
+			<div id="puppy-msg" class="puppy-msg"></div>
+		</div>
+		</br>
+		<div id= "puppy-admin-container" class= "puppy-admin-container">
+
+			<div id= "show-admin-button" class= "show-admin-button">
+				</br>
+				<button id= "admin-button" class= "admin-button"> Admin </button>
+				</br></br>
+			</div>
+
+
+			<div id="admin-form-container" class= "admin-form-container">
+				<h2>Puppy information:</h2>
+
+				<form id= "admin-form" name= "admin-form">
+					<div class= "admin-form-field" id= "admin-form-field">
+    					<label><b>Puppy Name</b></label>
+   						<input id="form-name" type="text" placeholder="Name" name="form-name">
+
+    					<label><b>Image URL</b></label>
+   						<input id="form-img-url" type="text" placeholder="Image URL" name="form-img-url">
+
+   						<label><b>Clicks</b></label>
+   						<input id="form-num-clicks" type="number" placeholder="0" name="form-num-clicks">
+
+   						<div class="clearfix">
+      						<button type="button" id="cancelbtn" class="cancelbtn">Cancel</button>
+    						<button type="button" id= "savebtn" class="savebtn">Save</button>
+    					</div>
+
+				    </div>
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+	<script src="js/puppyclickerfinalMOV.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+Lesson 2 Takeaways
+
+#1: Define the viewport. Put on top of html to make responsive:
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+#2: Max-width on elements. Adjust headers / footers / etc. by 100% (a relative value), not 
+    a fixed amount.
+
+#3: Tap target sizes. Make sure all buttons (known as “a tags,” typically 
+    designated by “a”) include a min-width and min-height of 48px
+
+	-> This also can be a padding of 1.5em (or 1.5 times the font size), as per the 
+	solution in the lesson exercise)

@@ -1,0 +1,43 @@
+Lesson 1 Notes
+
++ What is Linux?
+
+	It's an operating system, similar to Microsoft Windows or Apple OSX. But Linux is free.
+	~80% of web based apps have servers tied to Linux!
+
++ Linux distributions 
+
+	Many different distributions of Linux (e.g. Red Hat distibution, ubuntu, and debian)
+		- distributions can decide what software to include, who to invite in community, who can update, etc.
+		- Red hat = must pay for redhat - for large enterprises / corporate customers
+		- Ubuntu = is another distribution that has many different versions. Ubuntu focuses on ease of use on servers, desktops, laptops, among many others
+			-> recieves consistent updates to its software, which differs from its parent distribution, Debian (said another way, Ubuntu is one of many Debian derivatives)
+		- Debian = known for stability and reliability - software update cycle is very slow as many Debian servers have been up and running w/o requiring a reboot
+		- Linux Mint = based on Debian and Ubuntu (it's a modified version of Ubuntu). For desktop users and includes proprietary media support
+		- CoreOS = Targets companies building clusters of containerized applications; supports the development of open source projects including Container Linux, Kubernetes, and others[1] and creates products for management of containerized applications
+
++ Some important directories in your virtural machine
+
+	- home = where other users are stored
+	- etc = where configuration files live (useful for setting up web and database server)
+	- var = variable files = files that you expect will grow or change in size with time (you'll typically find system and application logs within this directory)
+
+	- bin = where exucutable binaries accessible by all users are stored (applications that you run, such as the ls command)
+	- sbin = similar to bin, except these binaries are only to be used by the root user for system administration and maintenance purposes. Within in the Linux File System, you would find system management applications that are not normally used by standard users here.
+	- lib = libraries that support the binaries located in the system
+	- usr = user programs = the difference between bin and usr directories isn't that important (the only difference, really, is that the binaries within bin are required for boot-up and system maintenance processes, and the binaries in usr aren't necessarily required for that)
+
++ $PATH and the $ variable = Linux systems provide a short cup system within the dollar sign path variable.
+
+	To see all the directories Linux will progress through in looking for a binary when you just type the name of it, type into Terminal/vagrant:
+
+		$ echo $PATH
+
+	Thus, when you type in an application like 'ls,' the system will start to look for the file in usr, the local, then bin... etc.
+
+	If you ever find your commands aren't being found, you might want to check this variable.
+
++ How to update PATH:
+
+	https://askubuntu.com/questions/60218/how-to-add-a-directory-to-the-path
+

@@ -1,0 +1,49 @@
+Lesson 3 Notes
+
+directors = like folders
+
+When you write a filename with a space or special punctuation, put the text in 'quotes' or procede each special char with \
+
+	e.g. Great Filename! = 'Great Filename!' or Great\ Filename\!
+
+\ = escaping
+
+pwd = print working directory
+
+cd = change directory
+
+cd .. = go up the tree to the parent directory
+
+/ = root direcotry
+
+absolute path = full path from the root path
+
+relative path (e.g. bash) = referring to a file using just the name
+
+mv = move a file; you can also use it to rename a file in the same direcotry, or to move several files into a directory
+
+cp = copying files; you can copy using a different name in the same directory, or a filename in a different directory, or a directory you want to put the new copy in
+
+mkdir = making directories
+
+rmdir = remove directory (can't remove directories with files)
+
+remdir -r = removes all files in directory
+
+Globbing = operating on files by name
+
+	ls *app matches all files with app at end
+	ls *app* matches files with app in between
+	ls b*png matches files that start with b and end with png
+	ls {css,html} matches files that end in css or html (NO SPACE!!!)
+	ls bea?.png = matches any one character, such as bean or bear (but not beast.png), while ?? matches any two characters, etc.
+	ls be[aeiou]r.png matches any character within the brackets
+	ls *{jpg, JPG} matches all files that end in jpg or JPG
+
+	Samples from Udacity quiz:
+
+	cp www/*html backup --> copy all files in the 'www' directory that end in 'html' to the 'backup' directory
+
+	ls *{jpg,png} --> list all files ending in 'jpg' or 'png' in the current directory
+
+	echo Short names: ? --> print 'short names:' followed by all one-character filenames in the current directory.

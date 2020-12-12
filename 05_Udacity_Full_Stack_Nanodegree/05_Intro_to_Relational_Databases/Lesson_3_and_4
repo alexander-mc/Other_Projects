@@ -1,0 +1,135 @@
+Lesson 3 Takeaways
+
+1) Why commit
+	- Good if two or more people are working on something at the same time.
+	- Can see previous changes someone has made.
+	- Good to see changes you made.
+	- Good if you want to change your mind about a change.
+	- If your code crashes, you won't get half finished databases.
+
+		- Atomicity = A change happens as a whole (atom) or not at all
+
+2) Normalized design:
+	- Every row has the same number of columns.
+	- There is a unique key, and everything in a row says something about the key.
+	- Facts that don't relate to the key belong in different tables.
+	- Tables shouldn't imply relationships that don't exist.
+
+3) Create a database in SQL:
+
+	create database name [options];
+
+4) Delete database in SQL:
+
+	drop database name[options];
+
+5a) Remove table in SQL (removes a table completely):
+
+	drop table name[options];
+
+5b) Remove all rows from table:
+	
+	delete from [table name];
+
+6) After creating a database in psql, connect to it with (note, you cannot drop a database you're connected to):
+
+	\c name
+
+7) Command to view table in sql:
+
+	select * from [table name]
+
+8) Create a table with column names in sql:
+
+	CREATE TABLE [table name](
+		[column name] [column type - text, serial, etc.],
+		[column name] [column type - text, serial, etc.]
+		);
+
+9) Create a table with column name and designate 1 primary key column:
+
+	CREATE TABLE [table name](
+		[column name] [column type - text, serial, etc.] primary key,
+		[column name] [column type - text, serial, etc.]
+		);
+
+9) Create a table with column name and designate multiple primary key columns:
+
+	CREATE TABLE [table name](
+		[column1 name] [column type - text, serial, etc.],
+		[column2 name] [column type - text, serial, etc.],
+		[column3 name] [column type - text, serial, etc.],
+		primary key (column1 name, column2 name)
+		);
+
+10) Create a table with a restriction to only include values in a column that correspond to the PRIMARY KEY in another table.
+
+	CREATE TABLE [table name](
+		[col1 name] [type] references [table0 to match primary key with] ([col name of primary key in table0...if col name is the same as col1, you can leave this blank]),
+		[col2 name] [type],
+		[col3 name] [type]);
+
+11) FOREIGN KEY = a column or set of columns with a references constraint on it. In other words, a foreign key is a column or set of columns in one table, that uniquely identifies rows in another table.
+
+	Example of table with two or more foreign keys (grades table):
+
+	create table students (
+		id serial primary key,
+		name text);
+
+	create table courses (
+		id text primary key,
+		name text);
+
+	create table grades (
+		student integer references students (id),
+		course text references courses (id),
+		grade text);
+
+12) Joining a table to its self (e.g. to find pairs of values and joining them together). In the following case, you want to find all rows in col1 where col 2 and col 3 are the same, and where col 1 is an integer.
+
+	select a.[col1], a.[col1]
+	from [table1] as a,
+		 [table1] as b
+	where
+		a.[col2] = b.[col2]
+		and a.[col3] = b.[col3]
+		and a[col1] < b[col1]
+
+13) Join a table and create an output column that counts entries appearing in both tables, including a "0" for entries that don't appear in both tables.
+
+	select [tableA].[column1], [tableA].[column2], count([tableA].[column2]) as num
+	  from [tableA] left join [tableB]
+	    on [tableA].[column2] = [tableB].[column2]
+	  group by [tableA].[column2];
+
+
+	  More on LEFT JOIN:
+
+	  SQL supports a number of variations on the theme of joins. The kind of join that you have seen earlier in this course is called an inner join, and it is the most common kind of join — so common that SQL doesn’t actually make us say "inner join" to do one.
+
+	  But the second most common is the left join, and its mirror-image partner, the right join. The words “left” and “right” refer to the tables to the left and right of the join operator. (Above, the left table is products and the right table is sales.)
+
+	  A regular (inner) join returns only those rows where the two tables have entries matching the join condition. A left join returns all those rows, plus the rows where the left table has an entry but the right table doesn’t. And a right join does the same but for the right table.
+
+	  (Just as “join” is short for “inner join”, so too is “left join” actually short for “left outer join”. But SQL lets us just say “left join”, which is a lot less typing. So we’ll do that.)
+
+14) SUBQUERY, or subselect = selecting from the result of a query
+
+
+	select name, weight
+		from players,
+			(select avg(weight) as av
+				from players) as subq
+	where weight < av;
+
+15) A VIEW is a select query stored in the database in a way that lets you use it like a table (it allows you to use a select query later without having to retype the query)
+
+	Example:
+
+	create view [course_size] as 
+		select [course_id],
+			count (*) as num
+		from enrollement
+		group by course_id;
+

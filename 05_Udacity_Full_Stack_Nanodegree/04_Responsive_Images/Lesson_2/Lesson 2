@@ -1,0 +1,85 @@
+Lesson 2 Takeaways
+
+1) Add a width width between images by adding a style tag to the HEAD element.
+
+	Example:
+
+	<style>
+	    body {
+	      margin: 0;
+	    }
+	    img {
+	      float: left;
+	      margin-right: 10px;
+	      width: calc((100% - 20px)/3)
+	    }
+	    img:last-of-type {
+	        margin-right: 0;
+	    }
+  	</style>
+
+ 2) You can use vw, vh, vmin, and vmax if you want an image to fit the size of a viewport.
+
+ 	Example:
+
+ 	<body>
+ 		<img src= "../../images/two_kittens_large.jpg" alt="Lias and little puss" style="
+ 			height: 100vh;
+ 		">
+ 		</body>
+
+ 3) Raster and Vector. Vector > Raster
+
+ 	To ways to create images. Raster images may come from camera or scanner or from the html canvas elements. They are a grid of colored dots
+
+ 	Vectors are like logos and can be created from adobe illustrator and other programs, or from using a vector format such as svg.
+
+ 	Vectors describe the geometry not individual dots of color.
+
+ 	Browsers can render a vector image at any size. SVG is perfect at any size. Raster formats can get blurry.
+
+ 	Vector image scales without quality degradation. Vector images can be scaled infinitely!
+
+ 	Vector images are also smaller!
+
+ 4) For photographic images, use jpeg or WebP where supported.
+
+ 5) For logos, use SVG for vector images. If you can't, use png. Always use png over gif (better compression and no licensing issues).
+
+ 6) There's no need to send images with natural resolutions higher than their display resolutions (unless you need to scale up for high DPI devices)
+
+ 7) Use image optimization tools such as ImageMagick.
+
+ 	https://classroom.udacity.com/courses/ud882/lessons/3520939843/concepts/35820386070923
+
+
+	 	ImageMagick: http://www.imagemagick.org/script/index.php
+	 	Simple ImageMagick installer for Mac: http://cactuslab.com/imagemagick/
+
+	 	Grunt
+	 	Getting started: https://gruntjs.com/getting-started
+	 	Info: https://24ways.org/2013/grunt-is-not-weird-and-hard/
+	 	Generate multi-resolution images with Grunt: https://addyosmani.com/blog/generate-multi-resolution-images-for-srcset-with-grunt/
+		grunt-responsive-images plugin for generating multiple images: https://github.com/andismith/grunt-responsive-images
+		grunt-respimg plugin for a responsive image workflow: https://www.npmjs.com/package/grunt-respimg
+
+		Files used in scripting examples:
+
+		convert.sh (includes instructions): 
+		Gruntfile.js (remove line 7, engine: 'im', on Windows): 
+		Imager.js: responsive image loading developed for BBC News: 
+
+		Image processing tools:
+		ImageOptim (Mac only)
+		Trimage - Similar to ImageOptim (Windows, Mac, Linux)
+		ImageAlpha
+
+8) Optimize image compression level
+
+		PageSpeed
+		https://developers.google.com/speed/pagespeed/insights/?url=google.com
+
+
+
+
+

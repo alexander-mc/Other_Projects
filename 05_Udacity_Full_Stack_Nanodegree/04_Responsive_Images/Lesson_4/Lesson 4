@@ -1,0 +1,101 @@
+Lesson 4 Takeaways
+
+1) Provide alternative files for an image using srcset. The following examples use "x" to differentiate between device pixel ratios (DPR). 1x represents 1x displays and 2x represents displays with twice the pixel density, like Apple's Retina displays. The browser will download the image that best correspeonds ot its DPR. Also note below that there's a src attribute as a fallback.
+
+	Example 1:
+
+	<img src="wallaby_1x.jpg" srcset="wallaby_1x.jpg 1x, wallaby_2x.jpg 2x" alt="Wallaby">
+
+	Example 2:
+
+	<img src="image_2x.jpg" srcset="image_2x.jpg 2x, image_1x.jpg 1x" alt="a cool image">
+
+2) While using srcset you can also use the "w" attribute to tell the browser the width of your image before it loads it. This prevents the browser from loading the image first to see which image to to use! Also note that there's a src attribaute as a fallback.
+
+	Example:
+
+	<img src="small.jpg" srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" alt="Wallaby">
+
+3) If the image won't be displayed at the full viewport width (say, you want the image to be smaller), you need something more than srcset (srcset assumes the image will be full viewport width).
+
+The sizes attribute tells the browser what the image display width will be and doesn't affect the display size of the image. 
+
+Add a sizes attribute to the image with a media query and a vw value. srcset and sizes together tell the browser the natural width of the image, and how wide the image will be displayed relative to viewport width. Knowing the display width of the image and the widths of the image files available to it, the browser has the information it needs to download the image with the right resolution for its needs that is as small as possible. And it can make this choice early in the page load while the HTML is still being parsed.
+
+	Example 1:
+
+	<img src="small.jpg" srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" sizes="50vw" alt="Wallaby" />
+
+	The sizes attribute tells the browser that the image will always be displayed at 50% of the viewport width and given the files available, choose appropriately.
+
+	Example 2:
+
+	<img  src="images/great_pic_800.jpg"
+      sizes="(max-width: 400px) 100vw, (min-width: 401px) 50vw"
+      srcset="images/great_pic_400.jpg 400w, images/great_pic_800.jpg 800w"
+      alt="great picture">
+
+     sizes consists of comma separated mediaQuery width pairs. sizes tells the browser early in the load process that the image will be displayed at some width when the mediaQuery is hit.
+
+	In fact, if sizes is missing, the browser defaults sizes to 100vw, meaning that it expects the image will display at the full viewport width.
+
+	sizes gives the browser one more piece of information to ensure that it downloads the right image file based on the eventual display width of the image. Just to be clear, it does not actually resize the image - that's what CSS does.
+
+	In this example, the browser knows that the image will be full viewport width if the browser's viewport is 400px wide or less, and half viewport width if greater than 400px. It knows that it has two image options - one with a natural width of 400px and the other 800px.
+
+4) What if you want different image display sizes at different viewport sizes? Use media queries with size attribute.
+
+	Example:
+
+	}
+	@media screen and (max-width: 250px) {
+		img {
+			width: 100vw;
+		}
+	}
+
+	<img src="small.jpg" srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" sizes="(max-width: 250px) 100vw, 50vw" alt="Wallaby" />
+
+5) Picture elements. Picture elements contain source elements that provide alternative sources for image files. It also allows you to include a fallback, such as the jpg file in the example below. This is a good way to make use of the high performance webp format for platforms that support, while providing an alternative for platforms that don't.
+
+	Example:
+
+	<picture>
+		<source srcset="kittens.webp" type="image/webp">
+		<source srcset="kittens.jpeg" type="image/jpeg">
+		<img src="kittens.jpg" alt="Two grey tabby kittens">
+	</picture>
+
+	More about the fallback. This is good for browsers that don't support the picture element, as you can include a plain image element.
+
+	In fact, the previous example can be re-written as,
+
+	<picture>
+		<source srcset="kittens.webp" type="image/webp">
+		<img src="kittens.jpg" alt="Two grey tabby kittens">
+	</picture>
+
+6) Choosing images to suit the viewing context (art direction) can be done using the picture element.
+
+	Example 1:
+
+	<picture>
+		<source media="(min-width: 650px)" srcset="kitten-large.png">
+		<source media="(min-width: 465px)" srcset="kitten-medium.png">		
+		<img src="kitten-small.png" alt="Cute kitten">
+	</picture>
+
+	Example 2 (combining media queries and srcset to specify images for smaller and larger viewports)
+
+	<picture>
+		<source media="(min-width: 1000px)" srcset="kookaburra-large_1x.jpg 1x, kookaburra_large_2x.jpg 2x">
+		<source media="(min-width: 500px)" srcset="kookaburra-medium_1x.jpg 1x, kookaburra_medium_2x.jpg 2x">	
+		<img src="kookaburra_small.jpg" alt="The kookaburra: a terrestrial tree kingfisher native to Austrailia and New Guinea (according to Wikipedia")>
+	</picture>
+
+7) Accessibility
+
+	General advice about alt attributes
+	alt attributes should be descriptive for important images.
+	alt attributes should be empty for images that are just decorations.
+	alt attributes should be set on every image.

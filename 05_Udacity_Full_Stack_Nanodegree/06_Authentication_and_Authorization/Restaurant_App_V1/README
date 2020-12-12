@@ -1,0 +1,36 @@
+
+1) Open terminal by searching for 'terminal' on computer.
+
+2) Change directory to OAuth (note, the file 'OAuth' MUST be in the directory 'Alexander' and not in another place such as 'Applications':
+
+	cd oauth
+
+3) Run your VM
+
+	vagrant up
+
+4) Log your terminal into the virtual machine
+
+	vagrant ssh
+
+	- To log out: type 'exit'
+	- To turn VM off (w/o deleting anything): type 'vagrant halt'
+	- To turn VM back on, you will need to type 'vagrant up' and 'vagrant ssh' again to log back in
+
+5) Change to the /vagrant directory by typing
+
+	cd /vagrant
+
+6) Initialize the database by typing
+
+	python database_setup.py
+
+7) Populate the database with restaurants and menu items by typing
+
+	python lotsofmenus.py
+
+8) Run the Flask web server by typing
+
+	python project.py
+
+9) In your browser, visit http://localhost:5000 to view the restaurant menu app. You will be able to view, add, edit, and delete menu items and restaurants.

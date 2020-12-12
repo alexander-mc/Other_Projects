@@ -1,0 +1,30 @@
+Lesson 1 Notes
+
+1) AJAX (Asynchronous JavaScript And XML) request. Allows data to be retrieved asynchronously.
+	Data that loads asynchronously can be requested late in the load process and the website should load acceptably with or without it.
+
+2) API sites
+
+	https://developers.google.com/apis-explorer/#p/
+
+	https://www.programmableweb.com/apis/directory
+
+3) jQuery = A JavaScript library meant to make a number of common JS tasks simpler, via consistent API across all browsers.
+
+	Can use jQuery's AJAX methods which helps ensure that AJAX requests work in every browser.
+
+	Common for developers to use libraries to write AJAX calls
+
+	jQuery looks like the following:
+
+		function loadData() {
+
+	    var $body = $('body');
+	    var $wikiElem = $('#wikipedia-links');       <- the second dollar sign is a 
+	    											 pointer to a jquery object. The # 
+	    											 sign represents an id.
+	    var $nytHeaderElem = $('#nytimes-header');
+	    var $nytElem = $('#nytimes-articles');
+	    var $greeting = $('#greeting');
+
+4) In the project, you'll be using two of jQuery's AJAX methods, jQuery.ajax() and jQuery.getJSON()

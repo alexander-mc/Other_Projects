@@ -1,0 +1,31 @@
+<!-- This html creates a form with values -->
+
+<html>
+<body>
+<h1> New Menu Item </h1>
+
+<form action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}" method = 'POST'>
+
+	<p>Course:</p>
+	<input type="radio" name="course" id="course4" value="Beverage">Beverage
+	<input type="radio" name="course" id="course1" value="Appetizer">Appetizer
+	<input type="radio" name="course" id="course2" value="Entree">Entree
+	<input type="radio" name="course" id="course3" value="Dessert">Dessert
+
+	<p>Name:</p>
+	<input type='text' size='30' name='name' placeholder="Name of the course">
+
+	<p>Description:</p>
+	<input type='text' size='200' name='description' placeholder="Description of the course">
+
+	<p>Price:</p>
+	<input type='text' size='10' name='price' placeholder="$0">
+
+	</br>
+	</br>
+	<input type='submit' value='Create'>
+
+</form>
+<a href = "{{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}"> Cancel </a>
+</body>
+</html>

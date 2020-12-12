@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang=“en”>
+	<head>
+		<meta charset=“utf-8”>      
+		<meta http-equiv=“X-UA-Compatible” content=“IE=edge”>      
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>The Puppy Portfolio</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+		<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class=“container”>      
+			<div class="row">
+				<div class="col-xs-3">
+					<img class="title-logo img-responsive" src="images/logo1.jpg" alt="Puppy logo">
+				</div>
+				<div class="col-xs-9 text-right text-uppercase">
+					<h1 class="title-super">The Puppy Portfolio</h1>
+					<h4 class="title-medium">Puppies Rock</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<hr>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<img class="img-responsive center-block" src="images/puppy1.jpg" alt="Main puppy image!">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Featured Pups</h2>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-4">
+					<img class="img-responsive" data-toggle="modal" data-target="#puppy2" src="images/puppy2.jpg" alt="Puppy2">
+					<h3 class="text-uppercase">Knight</h3>
+					<p>https://github.com/udacity/appify</p>
+				</div>
+				<div class="col-xs-4">
+					<img class="img-responsive" data-toggle="modal" data-target="#puppy3" src="images/puppy3.jpg" alt="Puppy3">
+					<h3 class="text-uppercase">Thing1 + Thing2</h3>
+					<p>https://github.com/udacity/sunflower</p>
+				</div>
+				<div class="col-xs-4">
+					<img class="img-responsive" data-toggle="modal" data-target="#puppy4" src="images/puppy5.jpg" alt="Puppy5">
+					<h3 class="text-uppercase">Rocky</h3>
+					<p>https://github.com/udacity/bokeh</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="puppy2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h1 class="text-center modal-large modal-title" id="myModalLabel">Knight</h1>
+	                </div>
+	                <div class="modal-body">
+	                    <img class="center-block img-responsive" src="images/puppy2.jpg">
+	                    <h2 class="text-center modal-medium">Hello! My name is Knight. I like to sleep!</h2>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+		<div class="modal fade" id="puppy3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="text-center modal-large modal-title" id="myModalLabel">Thing1 + Thing2</h4>
+	                </div>
+	                <div class="modal-body">
+	                    <img class="center-block img-responsive" src="images/puppy3.jpg">
+	                    <h2 class="text-center modal-medium"> Hi hi! Let's play! </h2>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+		<div class="modal fade" id="puppy4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="text-center  modal-large modal-title" id="myModalLabel">Rocky</h4>
+	                </div>
+	                <div class="modal-body">
+	                    <img class="center-block img-responsive" src="images/puppy5.jpg">
+	                    <h2 class=" text-center modal-medium"> I'm Rocky! My favorite game is Catch! <h2>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+	</body>
+</html>

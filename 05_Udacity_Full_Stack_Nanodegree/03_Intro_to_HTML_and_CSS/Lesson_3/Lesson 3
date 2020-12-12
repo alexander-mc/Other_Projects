@@ -1,0 +1,54 @@
+Lesson 3 Takeaways
+
+#1) Media queries
+
+	+ "media" means this is a media query
+	+ "only" means this works on old browsers
+	+ "screen" means this works on all screens
+		++ An alternative would be "print," which only works if printed
+	+"p" makes changes to all paragraphs
+
+	Example:
+
+		@media only screen and (max-width: 500px) {
+		    p {
+		        display: none;
+		    }
+		}
+
+
+#2) Add this link to make sure all css files work across all browsers
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css">
+		</head>
+		<body>
+		</body>
+	<html>
+
+
+#3) Put placeholder images into your file.
+
+	placekitten.com
+	placehold.it
+
+
+#4) Find a font via google.com/fonts, then place the link in <head>. Then go into your CSS file to make sure font is being used.
+
+	Example:
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+	THEN, in CSS file:
+
+	* {
+	font-family: 'Open Sans', sans-serif;
+	}
+
+
+#5) The * symbol in CSS means everything.
+
+
+#6) 

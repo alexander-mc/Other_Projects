@@ -1,0 +1,76 @@
+Lesson 1 Notes
+
+ls = list; gives a list of files in the folder
+
+curl = command to download files from the internet
+
+Terminal vs shell
+
+	terminal = terminal emulator = displays outputs from screen and accepts input from keyboard
+
+	shell = interprets what you wrote as a command, and then runs output to command
+
+		lots of different shell programs, but default on max is gnubash (or bash)
+
+history = history of commands
+
+date = tells time
+
+expr = calculator (expr = expresssion = evaluate)
+
+echo = shell's name for print statement
+
+uname = operating system (uname -a gives more information)
+
+hostname = prints out computer name
+
+host = looks up name in ip address
+
+bash --version = tells you what version of bash shell you have
+
+---
+
+shell command vs python functions
+
+both units are units of code, both have a name, and can take arguments
+but most commands are whole programs. shell commands are used to run programs but python functions are used to organize code
+
+--
+
+ctrl+r = reverse i search = lets you search your shell history
+
+unzip + filename = unzips a file
+
+cat = prints out content of file (cat = concatenate)
+
+[tab] = autocompletion
+
+wc = word count program = tells how many lines, words, and bytes are in a file
+
+diff = compares files and tells you how they differ
+
+man = manual
+
+. = files that start with a . are usually used for caching information and other things we don't usually use
+
+ls -a (also, ls --all) = all, don't ignore . files
+
+ls -l = long-listing
+
+apropos =
+
+	You can use apropos to find commands relevant to particular keywords.
+
+	For example apropos working directory provides a list of commands that somehow work with the current working directory.
+
+	apropos is good for refreshing your memory, or for finding new commands to explore!
+
+ctrl+c = how to stop some programs
+
+ctrl+d = how to execute and then stop other programs, such as 'sort'
+
+less = a program to read text one line at a time (the 'man' command uses this)
+
+nano = editing files, built into ubunto
+
+writeout = save the file

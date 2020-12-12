@@ -1,0 +1,20 @@
+<!-- This html creates a form with values -->
+
+<html>
+<body>
+<h1> New Restaurant </h1>
+
+<form action="{{url_for('newRestaurant')}}" method = 'POST'>
+<!-- ^ creates a post request -->
+
+<p>Name:</p>
+
+<input type='text' size='30' name='name'>
+
+<input type='submit' value='Create'>
+<a href = "{{url_for('showRestaurants')}}"> Cancel </a>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+Lesson 2 Notes
+
+1) Using the NYT Article Search api:
+
+	1) Request an API key:
+
+		http://developer.nytimes.com/
+
+	2) Get articles API. Visit:
+
+		http://developer.nytimes.com/article_search_v2.json#/Documentation/GET/articlesearch.json
+
+2) jQuery.get() is an abstraction of jQuery.ajax(), and jQuery.ajax()
+	is an abstraction of an asynchronous JavaScript request
+
+3) Generic HTML vs Unique HTML:
+
+	Generic HTML: refers to HTML and CSS that would be used for any user. For instance, all users would need the HTML for "Favorite Cereal," "Favorite Pasta," and the CSS describing how to style the user's image.
+
+	Unique HTML: refers to the HTML content that's specific to a user. For instance, "Cheerios," "Penne," "Breakfast" and my picture would be unique HTML.
+
+4) To make your website / web app feel really fast, you can request and render generic HTML way before unique html. This will populate generic information first and handle unique information later.

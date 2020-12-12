@@ -1,0 +1,99 @@
+Lesson 3 Takeaways
+
+#1: Set your breakpoints (the point at which the page changes layout). Write code so your website changes according the the characteristics of your device (apply different styles to different devices). You can do this in several ways:
+
+	1) Linked CSS approach. Include an additional style sheet on your page with a 
+           media query such as:
+
+		<link rel=“stylesheet” media = “screen and (min-width: 500px)” 
+		href=“over500.css”>
+
+	   Within the style sheet (over500.css), write code such as:
+
+		body {
+			background-color: blue;
+		}
+
+
+	   Another example:
+
+viewport ——---->   <meta name = “viewport” content = “width=device-width, initial-scale=1.0”>
+default pg ——-->   <link rel=“stylesheet” href=“weather.css”>
+breakpoint 1 —->   <link rel=“stylesheet” media “screen and (min-width: 550px)”
+ 		        href=“weather-medium.css”>
+breakpoint 2 -->   <link rel=“stylesheet” media “screen and (min-width: 700px)”
+		        href=“weather-large.css”>
+
+	2) @media approach. Embed the query with an @media tag (it is NOT recommended to 
+     	   embed with the @import tag!). Example:
+
+   		body {
+      		  background-color: green;
+    		}
+
+ 		@media screen and (max-width: 400px) {
+  		  body { background-color: red; }
+  		}
+
+ 		@media screen and (min-width: 600px) {				 		            
+                  body { background-color: blue; }
+    		}
+
+
+           You can also test two characteristics. Example:
+
+		@media screen and (min-width: 501px) and (max-width: 600px) {
+                  .yes {
+                    opacity: 1;
+                  }
+                  .no {
+                    opacity: 0;
+                  }
+                }
+
+
+#2: Two responsive “patterns”/strategies. for responsive design are FLEXBOX and FLEX GRIDS (only Flexbox discussed below).
+
+
+2a: Use flex to move elements one below another. Example:
+
+	  <style type=“text/css”>
+
+		.container {
+		 width: 100%;
+*		 display: flex;
+*		 flex-wrap: wrap;
+		}
+
+		.box { width: 150px; }
+
+	  </style>
+	 </head>
+	<body>
+	 <div class=“container”>
+	  <div class=“box dark_blue”></div>
+	  <div class=“box light_blue”></div>
+	  <div class=“box green”></div>
+	 </div>
+
+
+2b: Order attributes. You can use Flexbox + order attributes to change the order in which items are displayed on the screen. Example:
+
+	@media screen and (min-width: 700px) {
+	  .dark_blue { order: 4; }
+	  .light_blue { order: 5; }
+	  .green { order: 2; }
+	  .orange { order: 3; }
+	  .red { order: 1; }
+	}
+
+
+2c: Width. You can change the width of objects using order attributes, too. Example:
+
+	header { width: 100%; order: 0; }
+	.red { width: 50%; order: 1; }
+	.orange { width: 50%; order: 2; }
+	footer { width: 100%; order: 3; }
+	.light_blue { width: 20%; order: 4; }
+	.dark_blue { width: 60%; order: 5; }
+	.green { width: 20%; order: 6; }

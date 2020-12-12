@@ -1,0 +1,34 @@
+Follow these steps to view project:
+
+1) Open Terminal and go to database:
+
+	cd fullstack
+	cd vagrant
+
+2) Initiate VM using Vagrant:
+
+	vagrant up
+	vagrant ssh
+
+3) Go to vagrant shared file
+
+	cd /vagrant
+
+4) (Optional, as database should already exist) Run database_setup.py to create the database / file 'restaurantmenu.db'
+
+	python database_setup.py
+	
+5) (Optional, as restaurants and menus should already be populated) Run lotsofmenus.py to load restaurant and menu items into database.
+
+	python lotsofmenus.py
+
+6) Connect to the server by running the file finalproject.py.
+
+	python finalproject.py
+
+7) Open the port in your browser (port should read 8000, but double check in Terminal).
+
+	Type into browser: localhost:8000
+
+
+Look through your menu app -- have fun!!

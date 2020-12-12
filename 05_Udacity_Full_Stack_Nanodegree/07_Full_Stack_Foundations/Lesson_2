@@ -1,0 +1,53 @@
+Lesson 2 Notes
+
+1) Protocols - Are like the grammatical rules that we use to make sure that all machines on the internet are communicating in the same way. Three common types:
+
+	1) Transmission Control Protocol (TCP)
+
+		Enables information to be broken into small packets and sent between clients and servers
+		If a packet is lost, the sender and reciever have a way of figuring out which of the packets is missing and request that the missing packet be resent
+		The counterpart to TCP is UDP (User Datagram Protocol) = good for streaming content like music or video
+
+	2) Internet Protocol (IP)
+
+		IP addresses allow messages to be routed to all participants on the internet.
+		Every device gets an IP address that is statically or dynamically assigned by an internet service provider
+		Computer first looks up website IP address by looking in a domain name server (DNS)
+		Then it uses the address to initiate communication with the server for google
+		Operating systems use ports to designate channels of communication on the same IP address (e.g. 66.249.95.255:8080)
+
+		Ports
+		0-10000 = Ususally reserved by the OS for a specific use.
+		Most common port for webservers is port 80
+		local host = when client and server applications are on the same machine
+			special IP address: 127.0.0.1 (whenever we type local host or the special IP address, the OS knows to look for the resource locally, not in the internet)
+
+	3) Hypertext Transfer Protocol (HTTP)
+
+		Clients tell servers what they want by usuing an http verb, also known as an http method
+
+		Two most commonly used methods:
+
+			1) Get request - client tells server to "get me some information"
+				- Gets are sometimes called safe methods since they're only used to retrieve existing data from the database
+
+			2) Post request - client tells server "I want to modify some information that you have"
+				- Call to have data added, removed, or changed on a server
+
+			3) Status codes are a server's reply to a client as to what happened after a specific request, such as a get or a post
+
+			4) Servers can also supply any requested resources such as html, css, js, and media files such as images and audio
+
+			5) Common response codes:
+
+				200 : Successful GET
+				301: Successful POST
+				404: File not found
+
+2) Main method: instantiate our server and specify what port we will listen on
+
+3) Handler class: specifies what code to execute based on type of http request sent to server
+
+4) Port forwarding. Port forwarding allows us to open pages in our browser from the web server from our virtual machine as if they were being run locally. See which ports are being used for this class. If you want to use another port you can add another line to the vagrant file and run "vagrant reload" from a terminal in the directory of your vagrant file on your host machine. More information about port forwarding is available here -> https://docs.vagrantup.com/v2/networking/forwarded_ports.html
+
+5) Gets are good for viewing info already on server, but posts are what allow user to customize their web experience. Get requests happen by visiting the URL in a browser, but post requests from a broswer require data to be submitted, like with a form.

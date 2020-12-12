@@ -1,0 +1,54 @@
+body {
+	font-family: 'Indie Flower', cursive;
+	color: #84705b
+	/*font-weight: 300;*/
+}
+
+/* Some colors
+
+Dark red: #8B0000
+
+--
+
+To use these, you'll need to add the class into the html. Example (below):
+
+HTML Code:
+
+<h1 class="text-thin">The Puppy Portfolio</h1>
+
+
+CSS Code:
+
+	.text-muted {
+		color: #BCBBBB;
+	}
+
+	.text-thin {
+		font-weight: 100;
+	}
+
+*/
+
+.title-super {
+	font-size: 35px;
+}
+
+.title-medium {
+	font-size: 25px;
+}
+
+.title-logo {
+	margin-top:10px;
+}
+
+
+.modal-large {
+	font-size: 30px;
+}
+
+.modal-medium {
+	font-size: 25px;
+}
+
+
+

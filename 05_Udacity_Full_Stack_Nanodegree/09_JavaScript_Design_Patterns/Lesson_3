@@ -1,0 +1,110 @@
+Lesson 3 Notes
+
+Other terms for MVO (Model, View, Octopus)
+
+	+ Model View Controller (MVC)
+
+	+ Model View ViewModel (MVVM)
+
+	+ Model View Presenter (MVP)
+
+Library vs Framework (just JavaScript, not CSS) -- not much of a difference
+
+	Library - JS that someone or a group of people wrote and packaged up (e.g. making AJAX requests and manipulating the DOM). jQuery is an example of a library for DOM manipulation, AJAX, and much more. jQuery has an AJAX library and a DOM manipulation library built into it.
+
+	The good libraries make allowances for older browsers, abstracting away some of the browser differences and issues so you can spend more time building your app.
+
+	However, jQuery is NOT and ORGANIZATIONAL library, although it does give useful methods (it doesn't give anything to organize code).
+
+	ORGANIZATIONAL LIBRARIES - These focus on application organization (e.g. MVC/MVVM)
+
+
+	Organizational Frameworks - The exact definition is fuzzy, because it is created by developers. Some say frameworks call view render methods, while the libraries require you to call them.
+
+	The difference? Not too much.
+
+Examples of some libraries:
+
+	Underscore - to help fill in that JS doesn't have natively
+
+	Angular JS framework to give automatic updating of a page
+
+Fundamental Organizational Concepts:
+
+	Models = Represents data
+
+	Collections = Smart arrays, which are filled with models. Collections of data
+
+	ViewModel or Controller (e.g. Octopus)
+
+	Views = These draw the interface and allow user to interact with interface
+
+	Router = Keep track of the state of the URL (a view-like thing). The URL is something that you can interact with and see, kind of like views.
+
+Knockout JS = organizational library (Model, View, ViewModel). Modeljs.com
+
+	Features:
+
+	ViewModel: Knockout's ViewModel is similar to the Octopus. It separates the Model and the View
+
+	Declarative Bindings: Bindings allow you to connect the View and Model in a direct and simple way.
+
+		Allows you to connect the DOM and the viewmodel in a direct way without writing too many functions that ultimately do the same thing manually
+
+	Automatic UI (User Interface) Refresh: Knockout's will update the View when the Model changes. And with the right declarative bindings, Knockout can update the Model when elements in the View change (such as input elements, checkboxes, etc).
+
+	Dependency Tracking: Knockout allows you to create a relationship between parts of the Model, and will automatically update Model data that depends on other Model data when that other Model data changes.
+
+		Allows us to create relationships where one model depends on another model (e.g. levels based on number of clicks)
+
+Observable = a special kind of Knockout object to keep track of our data (instead of storing our data in a plain old object or as a simple value)
+
+	Objects with special functions on them.
+
+	Observables use a syntax like the following:
+
+		var favNum = ko.observable(42)
+
+	whereby 42 is passed through the variable.
+
+	To call on favNum, you use code much as you would with a function:
+
+	favNum();
+
+	The reason observables are treated like function is to get around an issue with JS. In JS, when you declare a variable and then update it, it doesn't update in the DOM, unless you write a function to update it. That's why knockout treats observables like functions.
+
+	To change the variable, you just pass in the data in the function, like so:
+
+	favNum(43)
+
+	Here, the variable, favNum, has been updated to 42. This changes the value in model and runs special code which notifies anyone using favNum, whether this be another model or a view. KO also runs some extra code to figure out what parts of the view need to be updated when the viewmodel has been notified. Thus, KO will keep track of variables and will intelligently manage any views that need to be changed, or other models that depends on our data that just changed.
+
+Documentation
+
+	Reading it is a core thing engineers do all the time.
+
+Knockout and the Cat / Puppy clicker project
+
+	You don't need a lot of the code using KO versus when writing via vanilla JS (eg getting objects from the model and sending them to view via octopus). This is because KO will handle the view to model and model to view synchronization from us. The only time we need to write viewModel methods are when we need to change something ourselves.
+
+	Knockout doesn't require html elements to have ids. Instead, it needs the elements to have bindings attached to them.
+
+	The bindings connect the view and the model. And Knockout is handling  alot of the logic to make that synchronization happen.
+
+Computed Observable = Another kind of model data object in knockout. They can create a value when they are accessed.
+
+	Are computed whenever they're accessed based on the value of other variables.
+
+Observable arrays = Like observables, but we want to use these whenever we have repeating elements.
+
+Control Flow = A fancy term for non-linear things, like loops and conditionals like if statements.
+
+Useful information on how to set up a LOCAL TESTING SERVER:
+
+	http://www.dwuser.com/education/content/why-you-need-a-testing-server-and-how-to-do-it/
+
+Useful information on how to set up a WEB SERVER VIA PYTHON:
+
+	http://www.linuxjournal.com/content/tech-tip-really-simple-http-server-python
+
+

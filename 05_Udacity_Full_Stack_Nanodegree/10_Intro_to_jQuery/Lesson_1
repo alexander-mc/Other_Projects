@@ -1,0 +1,60 @@
+ Lesson 1 Notes
+
+jQuery is a JavaScript library
+
+$ and jQuery are mapped to the same thing! haha
+
+$ is just easier to type than jQuery!
+
+$ -> jQuery collection (like an array but with additional methods)
+
+$(string) -> can pass a string
+$(funciton) -> can pass in a functin
+$(DOM Element)
+$.ajax()
+
+The DOM
+
+body(children below)
+	div
+		ul (unordered list)
+			li
+		form
+			input
+
+ul and form are siblings
+
+Can add jQuery to any website using script tags like the following:
+
+	local (for jQuery hosted on your own server):
+		<script src='js/jquery.min.js'></script>
+
+	jQuery official (good to use, too...but CDN is optimal)
+		<script src='//code.jquery.com/jquery-1.11.1.min.js'></script>
+	Content Delivery Network (CDNs, like Google) (*recommended*)
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+Use jQuery minified version (min) because it's sig smaller and thus performance is better
+
+Some jQuery selectors
+
+	$('tag') -> not very useful
+	$('.class') e.g. $('.green') selects all elements of class green
+	$('#id') -> specific to single elements
+
+DOM traversal methods
+
+	to find parent (go up only a single level in a tree): $('#idchild').parent()
+	
+	.parents(): finds all parents above you (go up many levels in a tree)
+	
+	to find a specific parent: $('#idchild').parents('#idparent')
+
+	to find immediate children:
+	$('#idparent').children()
+
+	to find grandchildren (or children more than 1 down the DOM tree):
+	$('#idparent').find() -->(you need to pass in a descriptor, and so to find all children, you would type .find(*))
+
+	to find siblings (elements with same parent):
+	$('#idsibling').siblings()

@@ -1,0 +1,60 @@
+Lesson 3 Notes
+
+1) Frameworks (such as Flask!) = take away repetitive tasks. help simplify coding
+
+2) URLs with variables
+
+	path/<type: variable_name>/path
+
+	where type can be an int, string, or another path
+
+3) Rendering Templates in Flask
+
+	render_template([templateName.html],[variable = keyword])
+
+	Notes:
+
+		Flask will look in a directory called 'templates', so you need ot make this in the same directory as your project file.
+
+4) HTML escaping with python
+
+	- When we want to get information from our database / python code into HTML
+	- Templates in Flask are already pre-configured to handle escape code (the code we are retrieving from our application and database and putting into our html)
+	- we have access to python variables and functions, and can even get the results added directly into our HTML code
+
+5) URL Building
+
+	- Helpful feature in Flask to create URLs based on the functions they execute
+	- Helpful when you want to create links to other pages inside your application
+	- Use the following function:
+
+		url_for()
+
+6) Message Flashing
+
+	Uses sessions. Session = a way a server can store information from multiple Web pages, to create a more personalized user experience
+
+	Use:
+
+	flash("insert message")
+
+	To recall:
+
+	get_flashed_messages()
+
+7) Styling with flask
+
+	Flask can automatically look for CSS, JavaScript, and media files if they are stored in a folder named 'static'
+
+8) API (application program interface) = Allows external applications to use public information our apps want to share
+
+	RESTful (Representational State Transfer) API = When an API is communicated over the Internet following the rules of HTTP
+
+		JSON (JavaScript object notation) = Popular way to send data with a restful architecture is with a format called JSON
+
+		JSON uses attribute value pairs delimited by a colon
+		Brackets used to encapsulate individual objects
+
+9) Flask, JSON, and APIs
+
+	Flask has a built-in package called jsonify to make it easy to configure API endpoints for applications

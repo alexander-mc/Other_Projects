@@ -1,0 +1,31 @@
+<html>
+
+<body>
+
+<h1> Edit Menu Item </h1>
+
+<form action="{{url_for('editMenuItem', restaurant_id = item.restaurant_id, menu_id = item.id)}}" method = 'POST'>
+
+	<p>Course:</p>
+	<input type="radio" name="course" id="course1" value="Appetizer" {% if item.course == 'Appetizer'%}checked{%endif%}>Appetizer
+	<input type="radio" name="course" id="course2" value="Entree" {% if item.course == 'Entree'%}checked{%endif%}>Entree
+	<input type="radio" name="course" id="course3" value="Dessert" {% if item.course == 'Dessert'%}checked{%endif%}>Dessert
+	<input type="radio" name="course" id="course4" value="Beverage" {% if item.course == 'Beverage'%}checked{%endif%}>Beverage
+
+	<p>Name:</p>
+	<input type='text' size='30' name='name' placeholder = '{{item.name}}'>
+
+	<p>Description:</p>
+	<input type='text' size='200' name='description' placeholder= '{{item.description}}'>
+
+	<p>Price:</p>
+	<input type='text' size='10' name='price' placeholder= '{{item.price}}'>
+
+	</br>
+	</br>
+	<input type='submit' value='Edit'>
+
+</form>
+<a href="{{url_for('restaurantMenu', restaurant_id = item.restaurant_id) }}">Cancel</a> 
+</body>
+</html>

@@ -1,0 +1,69 @@
+Lesson 3 Takeaways
+
+1) Aim to reduce the number of image requests, not just the size of the image.
+
+2) Don't use text as a graphic.
+	A) Blurry when zoomed in
+	B) Not recognized by search engine
+
+3) Consider not using any images at all
+	A) Think about whether you REALLY need the image
+
+4) Use CSS for text graphical effects
+	A) Note that this will decrease performance
+	B) Can use CSS to use a cropped version of the image when the viewport is small
+	C) Can use CSS to remove images if viewport is small
+
+5) See if you can use images as fonts. Graphics don't have image files.
+	A) Use unicode characters!
+
+		1) First add a meta tag to make sure your unicode can be recognized.
+
+			<meta charset="utf-8">
+
+		2) Go to the following website and paste in the character.
+
+		https://unicode-table.com/en/#control-character
+
+	B) You can even PASTE the unicode into the html! It's recommended to do so!!
+	C) Icon fonts are vector graphics
+
+	D) Other resources:
+
+		Zocial (social media buttons): http://zocial.smcllns.com/
+		See how to use social here: https://classroom.udacity.com/courses/ud882/lessons/3483659506/concepts/34791494350923
+
+			See html and css files for Project 2 file on how to include zocial social icons / buttons!!!
+
+		Font Awesome: http://fontawesome.io/
+		Free Icons: https://mobiriseicons.com/free-icons/cheatsheet.html
+		We Love Icon Fonts!: http://weloveiconfonts.com/
+		Icon fonts on CSS-Tricks: https://css-tricks.com/examples/IconFont/
+		ARIA: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
+
+6) Image Handling Techniques
+
+	A) Include link to source (ability to cache image and not have to reload it every time a visitor visits a different page on your website ... set srcs to an external file if an image is going to be used on multiple pages, over and over)
+	B) Include data for image (reduces http requests, and http requests is a major contributing factor to lag time, but takes up bytes) ("inline" image)
+	C) Rastor images
+	D) Vector images
+	E) Font icons + CSS techniques to style
+
+7) How to run grunt!
+
+	1) Change to the project's root directory. There needs to be the following two files in this directory:
+
+		1. package.json
+		2. Gruntfile.js
+
+		See a sample Gruntfile.js from this lesson -- maybe you can reuse it?
+
+	2) Instal project dependencies by typing the following in Terminal: 
+
+			npm install
+
+	3) Type in the command to run grunt. Using Gruntfile.js from this lesson, simply type into Terminal:
+
+			grunt
+
+

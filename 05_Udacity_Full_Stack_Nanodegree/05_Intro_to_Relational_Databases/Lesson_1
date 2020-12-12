@@ -1,0 +1,15 @@
+Lesson 1 Takeaways
+
+1) Why databases?
+	
+	- Gives persistence and data structures for storing and searching data usually much it faster and easier than if we were to search a flat file
+	- Ability to modify files at the same time
+
+2) Why relational databases?
+
+	- Offers tools for searching and querying data, and setting up constraints
+
+3) How data bases happen:
+
+	- Can call over a network
+	- Can call over a library that keeps a database over a local disk

@@ -1,0 +1,311 @@
+Lesson 1 Takeaways
+
+1) select ... where statements:
+
+	Example:
+
+	select name, birthdate from animals
+		where species = 'gorilla'
+		and name = 'Max'
+
+	select -> keyword
+	name, birthdate -> columns
+	from -> keyword
+	where species = 'gorilla' -> row restriction
+
+2) How to select using NOT (select animals that are not gorillas and not named max)
+
+	Example 1:
+
+	select name from animals where
+		(not species = 'gorilla') and (not name = 'max');
+
+	Example 2:
+
+	select name from animals where
+		not (species = 'gorilla' or name = 'Max');
+
+	Example 3:
+
+	select name from animals where
+		species != 'gorilla' and name != 'Max';
+
+3) limit ... offset
+
+	Example 1:
+
+	limit 10 offset  150
+
+	limit -> how many rows to return
+	offset -> how far into the results to start (in the example, starting with the 151st row)
+
+4) order  by [columns] [desc]
+
+	[desc] -> (optional) in descending order
+
+5) group by [columns] (use with count or sum)
+
+	Example 1:
+
+	select species, min(birthdate)
+		from animals group by species;
+
+	The above means "for each speciies of animal, find the smallest value of the birthdate column, that is, the oldest animal's birthdate."
+
+	Example 2:
+
+	select name, count(*) as num from animals group by name;
+
+	The above means to count all rows with a name (grouped by the name) and to place the value in a column named 'num'
+
+6) Summary (from Udacity course notes):
+
+	... limit count
+	Return just the first count rows of the result table.
+
+	... limit count offset skip
+	Return count rows starting after the first skip rows.
+
+	... order by columns
+	... order by columns desc
+	Sort the rows using the columns (one or more, separated by commas) as the sort key. Numerical columns will be sorted in numerical order; string columns in alphabetical order. With desc, the order is reversed (desc-ending order).
+
+	... group by columns
+	Change the behavior of aggregations such as max, count, and sum. With group by, the aggregation will return one row for each distinct value in columns.
+
+
+7) SQL vs Space
+
+	+ SQL is faster. In databases you can use indexes, restrictions
+	+ SQL takes up less space
+
+8) Summary of what was learned:
+
+	where
+
+	The where clause expresses restrictions — filtering a table for rows that follow a particular rule. where supports equalities, inequalities, and boolean operators (among other things):
+		where species = 'gorilla' — return only rows that have 'gorilla' as the value of the species column.
+		where name >= 'George' — return only rows where the name column is alphabetically after 'George'.
+		where species != 'gorilla' and name != 'George' — return only rows where species isn't 'gorilla' and name isn't 'George'.
+
+
+	limit / offset
+
+	The limit clause sets a limit on how many rows to return in the result table. The optional offset clause says how far to skip ahead into the results. So limit 10 offset 100 will return 10 results starting with the 101st.
+
+
+	order by
+
+	The order by clause tells the database how to sort the results — usually according to one or more columns. So order by species, name says to sort results first by the species column, then by name within each species.
+
+	Ordering happens before limit/offset, so you can use them together to extract pages of alphabetized results. (Think of the pages of a dictionary.)
+
+	The optional desc modifier tells the database to order results in descending order — for instance from large numbers to small ones, or from Z to A.
+
+
+	group by
+
+	The group by clause is only used with aggregations, such as max or sum. Without a group by clause, a select statement with an aggregation will aggregate over the whole selected table(s), returning only one row. With a group by clause, it will return one row for each distinct value of the column or expression in the group by clause.
+	Have
+
+9) This counts all species, groups them, creates a column num, and outputs in descending order (with most species at top of list)
+
+	select species, count(*) as num from animals group by species order by num desc
+
+10) insert. Add rows to table.
+
+	Insert: Adding Rows
+	The basic syntax for the insert statement:
+
+	insert into table ( column1, column2, ... ) values ( val1, val2, ... );
+
+	If the values are in the same order as the table's columns (starting with the first column), you don't have to specify the columns in the insert statement:
+
+	insert into table values ( val1, val2, ... );
+
+	For instance, if a table has three columns (a, b, c) and you want to insert into a and b, you can leave off the column names from the insert statement. But if you want to insert into b and c, or a and c, you have to specify the columns.
+
+	A single insert statement can only insert into a single table. (Contrast this with the select statement, which can pull data from several tables using a join.)
+
+11) There are two ways to join tables. The second way is more common in practice.
+
+	Join 1:
+
+	select T.thing, S.stuff         --> rows
+		from T join S               --> joined tables
+			on T.target = S.match   --> join condition
+		where ...                   --> restriction
+
+	Join 2 (more common in practice):
+
+	select T.thing, S.stuff from T, S
+		where T.target = S.match         --> restriction
+			and T.column = '...'         --> restriction
+
+
+
+	Example: Find the names of the individual animals that eat fish.
+
+	select name
+	    from animals, diet
+	    where animals.species = diet.species
+	    and diet.food = 'fish'
+
+12) where vs having
+
+	'where' is a restriction on the source tables (where only works BEFORE aggregations)
+	'having' is a restriction on the result ... AFTER aggregations!
+
+	So, the following will NOT find the species where there is only one animal:
+
+		select species, count(*) as num
+			from animals group by species 
+			where num = 1
+
+	INSTEAD, use:
+
+		select species, count(*) as num
+			from animals group by species
+			having num = 1
+
+
+	Example: Find the one food that is eaten by only one animal.
+
+		Solution 1 (used less in practice):
+
+		select food, count(animals.name) as num
+	       from diet join animals 
+	       on diet.species = animals.species
+	       group by food
+	       having num = 1
+
+		Solution 2 (used more in practice):
+
+		select food, count(animals.name) as num
+	       from diet, animals 
+	       where diet.species = animals.species
+	       group by food
+	       having num = 1
+
+
+    The having clause works like the where clause, but it applies after group by aggregations take place. The syntax is like this:
+
+		select columns from tables group by column having condition ;
+
+	Usually, at least one of the columns will be an aggregate function such as count, max, or sum on one of the tables' columns. In order to apply having to an aggregated column, you'll want to give it a name using as. For instance, if you had a table of items sold in a store, and you wanted to find all the items that have sold more than five units, you could use:
+
+		select name, count(*) as num from sales having num > 5;
+	
+	You can have a select statement that uses only where, or only group by, or group by and having, or where and group by, or all three of them!
+
+	But it doesn't usually make sense to use having without group by.
+
+	If you use both where and having, the where condition will filter the rows that are going into the aggregation, and the having condition will filter the rows that come out of it.
+
+	You can read more about having here:
+
+		http://www.postgresql.org/docs/9.4/static/sql-select.html#SQL-HAVING
+
+13) More on join. From Udacity quiz.
+
+	# List all the taxonomic orders, using their common names, sorted by the number of
+	# animals of that order that the zoo has.
+	#
+	# The animals table has (name, species, birthdate) for each individual.
+	# The taxonomy table has (name, species, genus, family, t_order) for each species.
+	# The ordernames table has (t_order, name) for each order.
+	#
+	# Be careful:  Each of these tables has a column "name", but they don't have the
+	# same meaning!  animals.name is an animal's individual name.  taxonomy.name is
+	# a species' common name (like 'brown bear').  And ordernames.name is the common
+	# name of an order (like 'Carnivores').
+
+
+	Tables introduced in this video
+
+	taxonomy
+
+	This table gives the (partial) biological taxonomic names for each species in the zoo. It can be used to find which species are more closely related to each other evolutionarily.
+		name — the common name of the species (e.g. 'jackal')
+		species — the taxonomic species name (e.g. 'aureus')
+		genus — the taxonomic genus name (e.g. 'Canis')
+		family — the taxonomic family name (e.g. 'Canidae')
+		t_order — the taxonomic order name (e.g. 'Carnivora')
+	
+	If you've never heard of this classification, don't worry about it; the details won't be necessary for this course. But if you're curious, Wikipedia articles Taxonomy and Biological classification may help.
+
+	ordernames
+	This table gives the common names for each of the taxonomic orders in the taxonomy table.
+
+		t_order — the taxonomic order name (e.g. 'Cetacea')
+		name — the common name (e.g. 'whales and dolphins')
+	
+
+	All the tables in the zoo database
+	
+	If you don't know what the contents of a table look like, you can always view all of it with select * from table. But here's a summary of what all the tables in the zoo database contain:
+	
+
+	animals
+	
+	This table lists individual animals in the zoo. Each animal has only one row. There may be multiple animals with the same name, or even multiple animals with the same name and species.
+		name — the animal's name (example: 'George')
+		species — the animal's species (example: 'gorilla')
+		birthdate — the animal's date of birth (example: '1998-05-18')
+	
+
+	diet
+	
+	This table matches up species with the foods they eat. Every species in the zoo eats at least one sort of food, and many eat more than one. If a species eats more than one food, there will be more than one row for that species.
+		species — the name of a species (example: 'hyena')
+		food — the name of a food that species eats (example: 'meat')
+
+
+	The SQL for it
+	
+	And here are the SQL commands that were used to create those tables. We won't cover the create table command until lesson 4, but it may be interesting to look at:
+	
+	create table animals (  
+	       name text,
+	       species text,
+	       birthdate date);
+	create table diet (
+	       species text,
+	       food text);  
+	create table taxonomy (
+	       name text,
+	       species text,
+	       genus text,
+	       family text,
+	       t_order text); 
+
+	create table ordernames (
+	       t_order text,
+	       name text);
+
+
+	Here's one possible solution:
+
+	select ordernames.name, count(*) as num
+	  from animals, taxonomy, ordernames
+	  where animals.species = taxonomy.name
+	    and taxonomy.t_order = ordernames.t_order
+	  group by ordernames.name
+	  order by num desc
+
+
+	And here's another, this time using the explicit join style:
+	
+	select ordernames.name, count(*) as num
+	  from (animals join taxonomy 
+	                on animals.species = taxonomy.name)
+	                as ani_tax
+	        join ordernames
+	             on ani_tax.t_order = ordernames.t_order
+	  group by ordernames.name
+	  order by num desc
+
+
+	I think the upper version is much more readable than the lower one, because in the explicit join style you have to explicitly tell the database what order to join the tables in — ((a join b) join c) — instead of just letting the database worry about that. If you're using a more barebones database (like SQLite) there can be a performance benefit to the explicit join style. But in PostgreSQL, the more server-oriented database system we'll be using next lesson, the query planner should optimize away any difference.
+
+

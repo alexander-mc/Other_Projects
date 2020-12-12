@@ -1,0 +1,17 @@
+Lesson 3 and 4 Notes
+
+Other than googleplus and facebook documentation on OAuth, here are links to documentation on other OAuth providers:
+
+	Amazon
+		http://login.amazon.com/website
+
+	GitHub
+		https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/
+
+	Paypal
+		https://developer.paypal.com/docs/api/overview/#authentication-and-authorization
+
+
+Official OAuth 2.0 Website
+
+	https://oauth.net/2/

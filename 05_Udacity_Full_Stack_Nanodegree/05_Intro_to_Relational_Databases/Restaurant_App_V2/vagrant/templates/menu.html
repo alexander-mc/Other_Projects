@@ -1,0 +1,85 @@
+<!-- The following template is escape code to be rendered by the project.py python file -->
+
+<html>
+
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles3.css') }}">
+</head>
+
+<body>
+<div class = 'pane'>
+	<div class = 'header'>
+		<h1>{{ restaurant.name }}</h1>
+	</div>
+
+</br>
+<a href='{{url_for('newMenuItem', restaurant_id = restaurant.id) }}'>Create New Item</a>
+</br>
+
+<div class = 'flash'>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li><strong>{{ message }} </strong></li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+</div>
+
+{% if num_beverages > 0 %}
+	<p5></br>Beverages</br></p5>
+	{% for i in items %}
+		{% if i.course == 'Beverage' %}
+			{% include 'menuDetails.html' %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if num_appetizers > 0 %}
+	<p5></br>Appetizers</br></p5>
+	{% for i in items %}
+		{% if i.course == 'Appetizer' %}
+			{% include 'menuDetails.html' %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if num_entrees > 0 %}
+	<p5></br>Entrees</br></p5>
+	{% for i in items %}
+		{% if i.course == 'Entree' %}
+			{% include 'menuDetails.html' %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+
+{% if num_desserts > 0 %}
+	<p5></br>Desserts</br></p5>
+	{% for i in items %}
+		{% if i.course == 'Dessert' %}
+			{% include 'menuDetails.html' %}
+		{% endif %}
+	{% endfor %}	
+{% endif %}
+
+{% if num_extras > 0 %}
+	<p5></br>Extras</br></p5>
+	{% for i in items %}
+		{% if i.course == None %}
+			{% include 'menuDetails.html' %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+</br>
+
+<a href = '{{ url_for('showRestaurants') }}'> Back to all restaurants </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+BACKGROUND:
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+For this project, you learned how to create a database and tables in a virtual machine, as well as how to perform queries on the database. The languages you used were sql and python.
+
+This document provides instructions on how to run the codes you wrote for tournament.sql and tournament.py. Step 1 walks you through how to run tournament.sql and Step 2 walks you through how to run tournament.py (via tournament_test.py, which was provided by Udacity.com).
+
+Tournament.sql creates two tables for a swiss-style tournament. The first table, 'players', lists the players in the tournament and their ID number. The second table, 'matches', lists the ID of the players who win and lose each match.
+
+Tournament.py includes python functions, most of which use sql to perform queries on your database. The following functions are in this file:
+
+	+ connect to the database
+	+ delete matches from the table 'matches'
+	+ delete players from table 'players'
+	+ count all players in the tournament
+	+ register a new player
+	+ provide a list of all players with their IDs and the number of wins and matches played for each individual
+	+ register the IDs of the players who win and lose a match
+	+ provide a list of players with their IDs who will be playing each other in the next round
+
+
+INSTRUCTIONS:
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+1) Create the database 'tournament' in your virtual machine.
+
+	1a) Open the Terminal application by searching for 'terminal' on your macOS
+	1b) Go to your virtual machine shared files folder in your computer by typing into Terminal:
+
+			cd /Applications/FSND-Virtual-Machine/vagrant
+
+	1c) Start and make sure vagrant is up to date (vagrant configures and enables you to communicate with your virtual machine). Type:
+
+			vagrant up
+
+	1d) Go into the virtual machine by typing:
+
+			vagrant ssh
+
+	1e) Go to the shared files folder in the virtual machine:
+
+			cd /vagrant
+
+	1f) Go to the 'tournament' folder:
+
+			cd tournament
+
+	1g) Open psql (runs psql so you can write in sql). Type:
+
+			psql
+
+	1h) By default, you are in the database 'vagrant'. You will need to create a new database, which will be called 'tournament'. To do this, import/run 'tournament.sql' by typing:
+
+			\i tournament.sql
+
+	1i) You can view the tables 'players' and 'matches' by typing the following, respectively:
+
+			select * from players;
+			select * from matches;
+
+2) Test the functions you wrote in 'tournament.py' by running 'tournament_test.py'
+
+	2a) Exit psql by typing:
+
+			\q
+
+	2b) Open python and run 'tournament_test.py':
+
+			python tournament_test.py
+
+		You should see the following output "...Success!  All tests pass!"
+
+CONGRATS!!! :D

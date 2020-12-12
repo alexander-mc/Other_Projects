@@ -1,0 +1,114 @@
+Lesson 5 Takeaways
+
+#1) Responsive tables (hidden columns, no more tables, contained tables).
+
+	1. Hidden columns technique. Do this by changing element to “display: none”.
+	
+	   Example:
+
+		body {
+		  margin: 1em;
+		}
+		
+		.longName {
+		  display: none;
+		}
+
+		.inning {
+		  display: none;
+		}
+
+	2. No more tables technique. Changing table layout to a list (columns become rows)
+
+		a) First, create a break (e.g. max-width: 500px)
+		b) Next, set the display of table, ahead, thead, body, th, td, and tr to block.
+		c) Third, get rid of table header by positioning element off-screen. (don’t use “display: none” because it will result in accessibility problems to screen readers because the browser won’t tell them the column headers).
+		d) Make room for header by adding left padding and setting position to relative).
+		e) Add row labels using “before sudo selector”.
+		f) Add content by using the code “content: attr(data-th);”
+
+		Example:
+
+			@media screen and (max-width: 500px) {
+			  table, thead, body, th, td, tr {
+			    display: block;
+			  }
+			  thead tr {
+			    position: absolute;
+			    top: -9999px;
+			    left: -9999px;
+			  }
+			  td {
+			    position: relative;
+			    padding-left: 50%;
+			  }
+			  td: before {
+			    position: absolute;
+			    left: 6px;
+			    content: attr(data-th);     <-- This will pull values from the 									data-th of each of the td elements 
+							(the “data-th” are used for the 
+							labels of each of the rows).
+			    font-weight: bold;
+			  }
+
+
+	3. Contained tables technique. Table keeps the same width but scrolls in the viewport! To do this, wrap contained table in a div and set div and overflow to auto (see below).
+
+		Example:
+
+			div.contained_table {
+			  width: 100%;              *
+			  overflow-x: auto;         *
+			}
+
+		      </style>
+		     </head>
+		     <body>
+		      <div class=“contained_table”>  *
+
+
+
+#2) For fonts, keep number of characters on one line to between 45 and 90. There seems to be a common consensus to about 65 characters per line on the web.
+
+* Take line length into consideration when thinking about creating your break points.
+* Start with 65 characters per line.
+* Set base font to at least 16 px (for text heavy sites, may want to increase to 18px).
+* Use at least a 1.2em line-height (for text heavy sites, may want to increase to 1.25em).
+
+
+
+#3) Use minor breakpoints, in addition to major breakpoints, such as to adjust margins, paddings, or increase font size. You can do this by adding a media query or a linked sheet (see examples below).
+
+	Example 1: Using a media query.
+
+	@media screen and (min-width: 450px) and (max-width: 550px) {
+	  body { font-size: 1em; }
+
+	  .seven-day-fc .temp-low,
+	  .seven-day-fc .temp-high {
+	    display: inline-block;
+	    width: 30%;
+	  }
+	  .seven-day-fc .icon {
+	    width: 60px;
+	    height: 60px;
+	  }
+	}
+
+	
+	Example 2: Link a stylesheet in head.
+
+	<head>
+	  <title>Weather</title>
+	  …
+	  <link rel=“stylesheet” media=“screen and min-width: 700px)” … >
+
+	
+	# within stylesheet
+	
+	.weather-forecast {
+	  width: 700px;
+	  margin-left: auto;
+	  margin-right: auto;
+	  display: block;
+	}

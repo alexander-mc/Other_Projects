@@ -1,0 +1,304 @@
+Lesson 2 Notes
+
++ This lesson will cover a number of security-related topics, including managing users, packages, or the software installed on the server, various methods of authenticating users, how Linux manages file permissions, and how to configure a firewall.
+
++ The rule of least privilege = a user or an application only has enough permission to do its job, nothing extra
+
++ sudo command = runs commands as if you are 'root' user
+
++ typically regarded as a best practice to not use the su command b/c of the rule of least privilege
+
++ packages = software
+
++ All of available package software are listed in this file:
+
+	/etc/apt/sources.list
+
++ The 'cat' (short for 'concatenate') command = You can read this file with the 'cat' command, like this:
+
+	cat/etc/apt/sources.list
+
++ To update, you need to update the package source list. But first, you need to make your system aware of the update. To do this, type in the command (and as the 'root' user, hence 'sudo'):
+
+	sudo apt-get update
+
++ Remember, the above does not CHANGE any software; it only makes your system aware of any updates. To make changes, after completing the above, enter the following command:
+
+	sudo apt-get upgrade
+
++ the apt-get command is the portal to getting all sorts of information. To see what is in entailed in the apt-get command, enter:
+
+	man apt-get
+
++ to see if there is anything unnecessary that can automatically be removed, enter the following command:
+
+	sudo apt-get autoremove
+
++ install finger:
+
+	sudo apt-get install finger
+
++ to view more packages to install:
+
+	https://packages.ubuntu.com/trusty/
+
++ to find user information, enter the following command to view the file in /etc/passwd:
+
+	cat /etc/passwd
+
+	Result: will look something like the following:
+
+	vagrant:x:1000:1000::/home/vagrant:/bin/bash
+
+	The first item is the user name. The second item is just a character that used to be an actual password. The third and fourth pieces represent user and group ids. the fifth piece (blank) is a short descriptions. The sixth piece is the file location and the final piece is the default shell base.
+
++ to create a new user, such as vagrant, enter the adduser command, with the user name (in this case, 'student'):
+
+	sudo adduser student
+
++ to connect to your server as the user, get out of vagrant, and in terminal on your local machine, enter the following command:
+
+	ssh student@127.0.0.1 -p 2222
+
+	The above is really what 'vagrant' does; that is, vagrant is a short-cut.
+
+	'ssh' means connect
+	'student' is the username
+	'127.0.0.1' means 'local host'
+	'-p' means port
+	'2222' is the port number
+
+	When vagrant set up, it automatically set up to this port.
+
++ to make sure the user ('student') can run sudo commands, you need to first log in to the server as a sudo user, in this case, 'vagrant'. As vagrant, read the file of all users who have access to sudo with the following command:
+
+	sudo cat /etc/sudoers
+
++ however, in ubuntu, as with other programs, it's best to make updates in the sudoers.d file, which gets copied into sudoers. This is for security purposes.
+
++ check out 'sudo ls /etc/sudoers.d' to see what is in this file.
+
++ to give a new user, such as 'student', access to sudo, first copy the file '/etc/sudoers.d/vagrant' and name it student with the following:
+
+	sudo cp /etc/sudoers.d/vagrant /etc/sudoers.d/student
+
++ next, make a small edit to the above file using the following command:
+
+	sudo nano /etc/sudoers.d/student
+
++ now, a user can change his password using the 'passwd' command, but as the super user, you can force a user to do this after a certain amount of time has expired. To do this,
+
+	sudo passwd -e student
+
++ a more secure security measure does not rely on passwords (which are often not very secure, since they need to be simple enough for us to remember). This method is called 'key encryption'.
+
++ how public key encryption works:
+
+	A server will send a message to a client.
+	The client will encrypt the message with a private key, then send the message back to the server.
+	The server will unencrypt the message with its public key, and if the message is the same as the one it sent, the client is said to have 'authenticated'
+
++ to generate the key pair, you need to first do it on your local machine (NOT THE SERVER!). Thus, key pairs need to always be generated LOCALLY (aka not vagrant or any other server-like server!!!)
+
++ in terminal on your local machine, enter the command:
+
+	ssh-keygen
+
++ the default directory that key pairs should exist is:
+
+	/Users/Alexander/.ssh
+
++ the file this example keygen was saved in was:
+
+	/Users/Alexander/.ssh/intro-to-linux
+
++ the passphrase was:
+
+	student
+
++ two files will be created. in the following example, they were:
+
+	/Users/Alexander/.ssh/intro-to-linux
+	/Users/Alexander/.ssh/intro-to-linux.pub
+
++ the second file (ending in .pub) is what we'll place on our server to enable key based authentication.
+
++ the ssh-keygen application can generate many types of keys. in the example, the key that was created was an 'RSA' type, which is the default type
+
++ you've created a public key, but you now need to place it on your server, so ssh can use it to log in. to do this manually, first make sure you're logged in as the sudo user (in this case, student.)
+
++ then make a directory in the home directory called .ssh.
+
+	mkdir .ssh
+
+	The above is a special directory where all your key related files must be stored
+
++ then make a file called authorized keys:
+
+	touch .ssh/authorized_keys
+
+	The above is another special file that will store all public keys that only this account is allowed to use for authentication.
+
++ you'll need to copy the information in the key file on your local machine into the 'student' account on the server. to do this, first, on your local machine, open the .pub file:
+
+	cat /Users/Alexander/.ssh/intro-to-linux.pub
+
++ next, copy the text in the file. in this case,
+
+	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC73bQr02i4MO/LqOkf5UavLSWCbzKh0vpXyeS2KgCMoSSp9ju+ED1LkqjRy1dtoZM0YuacFolWcYY1D5oY1PSCtmNzBarnRtgLI0Ng6RiiNNEroeqqKHI3wnlGrUATgOHd1pJ6bIx78h09YAXUNbhrsVtBYV5U+fe3Yws4JWZ2W6hSaNGmBrptEF6nY11YXKssTY1sBbN1iQ+c+yvF7+nNsq3zWL+WfPp3qM39SXXJI+JL6JPrDBHVFFAo85pi/5j+gMM+nPh16CMN8mUR4gMpw6FXQsHdmXVGNBuLFskvC7+/KYiEEatV/tfM26CdsHsLH0fv1vsNJL/ZxsXZFar3 Alexander@Alexanders-MacBook-Pro.local
+
++ then, go into your server, and make sure you're logged in as 'student,' or whichever user you want to store the public key.
+
++ type in the command to edit the authorized key file:
+
+	nano .ssh/authorized_keys
+
++ paste in the key and then exit the file, being sure to save it.
+
++ the final thing you need to do is set up specific file permissions on the authorized key file and the ssh directory. this is a security measure that ssh enforces to ensure other users cannot gain access to your account.
+
++ to do the above, in 'student, 'run:
+
+	chmod 700 .ssh
+
+
+		Exploring 'chmod'
+
+			First, let's look into the students' home directory:
+
+				ls -al
+
+			In the first column, there are 9 character blocks, which should be thought of as three sections. for instance:
+
+				rw- r-- r--
+
+			The first entry is what the 'owner' can do. So the owner in the example, the owner can read and write the file. The - means the owner cannot execute the file.
+
+			The second entry means that users in the group can only read the file.
+
+			The last entry means that the public (everyone) can read the file, but cannot write or execute it.
+
+			To identify who the owner and the group are, go back to the directory listing:
+
+				ls -al
+
+			The third and fourth columns (e.g. student student) state the username and the group name. In the example, the system has a username student, which is the owner of the file, and a group name student, which was automatically created when we made the user. It's common practice to have a group name the same as the user, BUT THEY ARE TWO DIFFERENT THINGS.
+
+			looking at the root directory, 'drwxr-xr-x',
+
+				the 'd' means it's a directory
+				and the following three characters 'rwx' means that only the owner, 'root' can write to the directory. we can read what's in the parent directory, and even enter the directory, because we can execute, but we cannot write into it.
+
+			+ Octal Permissions:
+
+			r = read = 4
+			w = write = 2
+			x = execuate = 1
+			no permissions = 0
+
+			+ by adding all together, we end up with a result identifying the full set of permissions to apply.
+				
+				+ so to add read and execute permissions, you would use 4+1 = 5.
+				
+				+ and for a file with something like 
+
+				rw- r-- r--
+				
+				the octal permission would be 6 4 4, or 644.
+
++ and then 
+	
+	chmod 644 .ssh/authorized_keys
+
++ You're all done! Now you can log in as the student user, but instead of using your remote password, you can type:
+
+	ssh student@127.0.0.1 -p 2222 -i /Users/Alexander/.ssh/intro-to-linux
+
+	be sure to enter the passphrase (in the above example, it was 'student')
+
++ The final thing you'll want to do to secure the authorization process is to disable the password base login (forcing all users to login using a key pair)
+
++ to do this, in your 'student' server account, you'll need to edit the configuration file for sshd, which is the service running on the server listening to all of your ssh connections. This configuration file is located at etc/ssh/sshd_config. it can be edited by the following command:
+
+	sudo nano /etc/ssh/sshd_config
+
++ look in the documentation for the text:
+
+	# Change to no to disable tunnelled clear text passwords
+	PasswordAuthentication yes
+
+	++ Change 'Password Authenitcation' to 'no'
+
++ finally, restart, using the following command:
+
+	sudo service ssh restart
+
++ that's it! now all users will be forced to log in using a key pair. SSH will no longer allow users to log in with a user name and  password any longer.
+
++ chmod = change file permissions
+
++ chown = change owners
+
+		(e.g. to change the owner of the .bash_history file to root, enter
+
+				sudo chown root .bash_history
+
+				now, look under the directory listing by entering the command
+
+					-ls -al
+
+				notice that the owner is now root, not student!)
+
++ chgrp = change group
+
++ FIREWALLS!
+
+		+ Each application accepts requests via a specific port.
+
+		+ The rule of least privilege states that we should only listen on ports required for our application (we don't need to listen on all ports!)
+
+		+ We can configure which ports we want our application to listen to using a firewall
+
+		+ ubunto comes with a firewall pre-installed, ufw, but it's not currently active. check this by using the following command:
+
+			sudo ufw status
+
+		+ we'll first change the permissions, and then activate the firewall
+
+		+ we want to first deny all requests, and then only allow certain ports to allow incoming information. Deny incoming:
+
+			+ sudo ufw default deny incoming
+
+			and allow outcoming:
+			
+			+ sudo ufw default allow outgoing
+
+			+ start by allowing the ports we know we'll need for the application our server will be supporting.
+
+									sudo ufw allow ssh
+
+			+ in the example, since we're using vagrant, and since vagrant set our ssh on port 2222, we'll need to allow all TCP connections through port 2222 for ssh to actually work in this scenario:
+
+									sudo ufw allow 2222/tcp
+
+			+ for now the only other application we plan to support is a basic http server. to allow this:
+
+									sudo ufw allow www
+
+			+ now we can enable our firewall:
+
+									sudo ufw enable
+
+			+ you can confirm all the rules are set up using the sudo ufw status command.
+
+More information on configuring a server based on a variety of use cases:
+
+"LAMP" Stack (Linux, Apache, MySQL, PHP): https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04
+
+"LEMP" Stack (Linux, nginx, MySQL, PHP): https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04
+
+PEPS Mail and File Storage: https://www.digitalocean.com/community/tutorials/how-to-run-your-own-mail-server-and-file-storage-with-peps-on-ubuntu-14-04
+
+Mail-in-a-Box Email Server: https://www.digitalocean.com/community/tutorials/how-to-run-your-own-mail-server-with-mail-in-a-box-on-ubuntu-14-04
+
+Lita IRC Chat Bot: https://www.digitalocean.com/community/tutorials/how-to-install-the-lita-chat-bot-for-irc-on-ubuntu-14-04

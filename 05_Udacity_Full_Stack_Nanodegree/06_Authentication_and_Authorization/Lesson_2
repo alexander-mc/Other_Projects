@@ -1,0 +1,55 @@
+Lesson-2 Notes
+
+1) Auth Flow = the way information is exchanged between a client, serve, and OAuth provider.
+
+	Client-side auth flow = authentication from users browsers
+		+ quick and easy
+		- server cannot make api calls to the OAuth provider on behalf of the user
+
+	Server-side auth flow = allows servers to obtain access token to allow server to make API requests on behalf of the user
+		+ gives more power to server-side application
+		- but server is responsible for securely implementing session tracking
+
+	Google+ allows for hybridized flow
+
+		+ User logs into google, authorizing use of your app on the client side via JavaScript
+
+		+ google+ api server then gives client one-time code and access code
+
+		+ client sends one-time code to server
+
+		+ server then relays one-time code to google+ api server
+
+		+ in return, your server is given access token from google+ api server, enabling it to make its own api calls, which can be done even when user is offline
+
+		++ This one-time code flow has a security advantage over a pure server-side flow because w/one-time code google provides tokens directly to server w/o any intermediary. This is a client secret.
+
+			+++ A client secret is a special code google issues to verify your application.
+
+2) Create client ID and client secret with google to communicate with its API libraries.
+
+3) Anti-forgery state tokens = Ensure that its actually the user sending the request and not someone tricking them into sending it. Prevents forgery request attacks.
+
+	- Create a unique session token that your client-side code returns alongside the google generated authorization code.
+
+		- This session token is passed onto the client. For a forgery attack, the attacker would have to guess this code to make a change on the user's behalf.
+
+	- For an example on how to do this, view project.py and the following codes that were inserted:
+
+		#NEW IMPORTS TO GENERATE UNIQUE SESSION TOKENS FOR ANTI-FORGERY
+		from flask import session as login_session
+		import random, string
+
+		# CREATE A STATE TOKEN TO PREVENT REQUEST FORGERY.
+		# STORE IT IN THE SESSION FOR LATER VALIDATION
+		@app.route('/login') # CREATE A NEW ROUTING PATH AND CALL IT /LOGIN.
+		def showLogin(): # CREATE SHOW LOGIN FUNCTION
+		  state = ''.join(random.choice(string.ascii_uppercase + string.digits) \
+		   for x in xrange(32)) # The state variable will be 32 characters long and be a mix of uppercase characters and digits
+		  login_session['state'] = state #store state in login session object under name 'state'
+		  return "The current session state is %s" %login_session['state'] #to see what state looks like, return the following string.
+
+4) Now that logins are in place, make a button that users can click to loginto app.
+
+5) We've written the code that goes to google to authenticate. Now we need to write a callback message to handle the response that google sends back to the client.
+	Along with response, google api server will provide one-time code to authorize our server and an access code that the client can use to make api calls from within the browser

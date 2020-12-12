@@ -1,0 +1,43 @@
+Lesson 1 Notes
+
+Add security features to web applications, allowing users to log in securely and access permission systems, using OAuth2 providers
+
+1) Difference between authentication and authorization
+
+Authentication = Process of verifying you are who you say you are (e.g. passwords to log in).
+
+	Securing your web application:
+
+		Strong passwords
+		Strong encryption
+		Secure communication
+		Password storage
+		Password recovery
+		2-factor authentification that requires 2 keys
+		Man-in-middle attack
+
+	Can use third-party authentication such as with facebook and google+
+
+		Pros:
+		+ outsource auth handling to OAuth providers
+		+ easier to register users (less friction)
+		+ less passwords for users to remember
+
+		Cons:
+		- users don't trust your site
+			-> keep auth scopes minimum
+		- limited / restricted internet access
+		- different auth requirements (need a stronger p/w than offered by third-party)
+
+Authorization = Do you have the right to the resource you are trying to access ("are you on the VIP list?"). When you first log in via facebook / google+, the third party asks whether they have permission to do something. Authorization allows users to log in to an application while still protecting its most valuable assets.
+
+	Most of times, authorization happens with authentication, but can happen too without authentication too (e.g. coupons and discounts without having to authenticate, cookies, public files that require a link in dropbox)
+
+	OAuth = most widely used standard for authorization.
+
+		- open standard
+		- openID connect = application built on OAuth
+
+
+
+

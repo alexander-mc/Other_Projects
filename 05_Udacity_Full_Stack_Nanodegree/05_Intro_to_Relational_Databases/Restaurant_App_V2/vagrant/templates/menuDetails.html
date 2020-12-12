@@ -1,0 +1,22 @@
+<div class = 'nameAndPrice'>
+	<span class = 'name'><p>{{i.name}}</p></span>
+	<!-- ^ the results we want the above single bracket html code to spit out -->
+	<span class = 'price'>
+	<p> {{i.price}} </p>
+	</span>
+</div>
+
+<div class = 'description'>
+	<p>{{i.description}}</p>
+</div>
+
+<div class = 'editdeletepane'>
+	<a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id) }}">Edit</a>
+	<!-- ^ URL Building
+		- Helpful feature in Flask to create URLs based on the functions they execute
+		- Helpful when you want to create links to other pages inside your application
+		- Use the following function: url_for() -->
+	<a href = '{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id ) }}'>Delete</a>
+	</br>
+	</br>
+</div>

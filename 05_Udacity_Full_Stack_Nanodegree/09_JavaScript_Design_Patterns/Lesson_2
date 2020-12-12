@@ -1,0 +1,12 @@
+Lesson 2 Notes
+
+Refactoring - The process by which you take a piece of code and make it more readible and maintainable without changing its functionality.
+
+	- This means, you might want to break up large functions or complicated functions, without chaning the way they are accessed by the outside world or the other componenets of your application.
+
+	- Taking the organization and the big functions and breaking things up, but it's important to not change things in terms of the way the components interact with each other.
+
+	- This makes sure you increase readibility and maintainability and ease of working with your code but without breaking the contract you have between you and the developers you're working with and the contract that the pieces of the app have with each other.
+
+
+
